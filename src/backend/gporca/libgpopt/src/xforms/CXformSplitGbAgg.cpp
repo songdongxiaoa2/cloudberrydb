@@ -136,11 +136,11 @@ CXformSplitGbAgg::Transform(CXformContext *pxfctxt, CXformResult *pxfres,
 
 	CColRefArray *colref_array = popAgg->Pdrgpcr();
 
-	colref_array->AddRef();
 	CColRefArray *pdrgpcrLocal = colref_array;
-
 	colref_array->AddRef();
+
 	CColRefArray *pdrgpcrGlobal = colref_array;
+	colref_array->AddRef();
 
 	CColRefArray *pdrgpcrMinimal = popAgg->PdrgpcrMinimal();
 	if (nullptr != pdrgpcrMinimal)
@@ -209,7 +209,7 @@ CXformSplitGbAgg::PopulateLocalGlobalProjectList(
 			popScAggFunc->IsDistinct(), EaggfuncstageLocal, /* fGlobal */
 			true /* fSplit */, nullptr /* pmdidResolvedReturnType */,
 			EaggfunckindNormal, popScAggFunc->GetArgTypes(),
-			popScAggFunc->FRepSafe());
+			popScAggFunc->FRepSafe(), popScAggFunc->IsAggStar());
 
 		popScAggFunc->MDId()->AddRef();
 		popScAggFunc->GetArgTypes()->AddRef();
@@ -220,7 +220,7 @@ CXformSplitGbAgg::PopulateLocalGlobalProjectList(
 			false /* is_distinct */, EaggfuncstageGlobal, /* fGlobal */
 			true /* fSplit */, nullptr /* pmdidResolvedReturnType */,
 			EaggfunckindNormal, popScAggFunc->GetArgTypes(),
-			popScAggFunc->FRepSafe());
+			popScAggFunc->FRepSafe(), popScAggFunc->IsAggStar());
 
 		// determine column reference for the new project element
 		const IMDAggregate *pmdagg =

@@ -76,6 +76,7 @@ enum Edxltoken
 	EdxltokenWindowOids,
 	EdxltokenOidRowNumber,
 	EdxltokenOidRank,
+	EdxltokenOidDenseRank,
 
 	EdxltokenPlanSamples,
 
@@ -315,6 +316,7 @@ enum Edxltoken
 
 	EdxltokenAggrefOid,
 	EdxltokenAggrefDistinct,
+	EdxltokenAggrefIsAggStar,
 	EdxltokenAggrefArgTypes,
 	EdxltokenAggrefKind,
 	EdxltokenAggrefStage,
